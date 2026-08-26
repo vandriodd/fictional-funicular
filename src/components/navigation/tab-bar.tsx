@@ -31,7 +31,7 @@ const LEFT_TABS: TabDescriptor[] = [
 ];
 
 const RIGHT_TABS: TabDescriptor[] = [
-  { name: "goals", label: "Goals", Icon: GoalIcon },
+  { name: 'goals', label: 'Goals', Icon: GoalIcon, owns: ['new-goal'] },
   { name: 'categories', label: 'Categories', Icon: TagIcon, owns: ['new-category'] },
 ];
 

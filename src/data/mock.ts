@@ -153,3 +153,53 @@ export const PROFILE_EMOJIS = [
   '🌻', '🍕', '🚀', '⚡', '🎧', '🎸',
   '🏀', '⚽', '🧠', '👾', '🎨', '✨',
 ];
+
+export type Goal = {
+  id: string;
+  title: string;
+  categoryId: string;
+  /** Ceiling for the period, in the goal's own currency. */
+  limit: number;
+  /**
+   * Spend already made this period that the transaction list does not cover —
+   * the list is only a recent slice. Live spend adds matching transactions on
+   * top of this. Seeded so the sample goals start at their designed figures.
+   */
+  openingSpent: number;
+  currency: CurrencyCode;
+  /** Identity colour, used for the tile tint and the progress bar. */
+  color: string;
+};
+
+export const goals: Goal[] = [
+  {
+    id: 'goal-1',
+    title: 'Food for the whole month',
+    categoryId: 'food',
+    limit: 20_000,
+    openingSpent: 11_550,
+    currency: 'MUR',
+    color: Colors.primary,
+  },
+  {
+    id: 'goal-2',
+    title: 'Utilities for the whole month',
+    categoryId: 'utilities',
+    limit: 10_000,
+    openingSpent: 5_600,
+    currency: 'MUR',
+    color: Colors.primary,
+  },
+  {
+    id: 'goal-3',
+    title: 'Transport for the whole month',
+    categoryId: 'transport',
+    limit: 5_000,
+    openingSpent: 3_680,
+    currency: 'MUR',
+    color: Colors.primary,
+  },
+];
+
+/** Past this share of the limit the progress bar switches to the warning colour. */
+export const GOAL_WARNING_RATIO = 0.75;

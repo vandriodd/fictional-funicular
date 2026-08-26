@@ -14,6 +14,7 @@ import { useEffect } from "react";
 import { Colors, Radius } from "@/constants/theme";
 import { ProfileProvider } from '@/state/profile';
 import { CategoriesProvider } from '@/state/categories';
+import { GoalsProvider } from '@/state/goals';
 import { TransactionsProvider } from '@/state/transactions';
 
 SplashScreen.preventAutoHideAsync();
@@ -60,6 +61,7 @@ export default function RootLayout() {
   return (
     <ProfileProvider>
       <CategoriesProvider>
+          <GoalsProvider>
         <TransactionsProvider>
       <ThemeProvider value={navigationTheme}>
         <StatusBar style="dark" />
@@ -79,6 +81,7 @@ export default function RootLayout() {
         </Stack>
       </ThemeProvider>
       </TransactionsProvider>
+        </GoalsProvider>
         </CategoriesProvider>
     </ProfileProvider>
   );

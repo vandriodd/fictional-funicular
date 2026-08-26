@@ -471,3 +471,33 @@ export function EditIcon({ size, color, ...rest }: IconProps) {
     </IconBase>
   );
 }
+
+export function MoreIcon({ size, color, ...rest }: IconProps) {
+  return (
+    <IconBase size={size} {...rest}>
+      <Circle cx={12} cy={5} r={1.7} fill={color} />
+      <Circle cx={12} cy={12} r={1.7} fill={color} />
+      <Circle cx={12} cy={19} r={1.7} fill={color} />
+    </IconBase>
+  );
+}
+
+export function TrashIcon({ size, color, ...rest }: IconProps) {
+  return (
+    <IconBase size={size} {...rest}>
+      <Path
+        d="M3.8 6.2h16.4M8.6 6.2V4.4a1.6 1.6 0 0 1 1.6-1.6h3.6a1.6 1.6 0 0 1 1.6 1.6v1.8"
+        stroke={color}
+        strokeWidth={STROKE_WIDTH}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <Path
+        d="M5.8 6.2h12.4l-.9 13a1.9 1.9 0 0 1-1.9 1.8H8.6a1.9 1.9 0 0 1-1.9-1.8z"
+        stroke={color}
+        strokeWidth={STROKE_WIDTH}
+        strokeLinejoin="round"
+      />
+    </IconBase>
+  );
+}
