@@ -3,15 +3,14 @@ import { PieChart } from "react-native-gifted-charts";
 
 import { Colors, FontFamily, Radius, Spacing } from "@/constants/theme";
 import { expensesByCategory } from "@/data/mock";
-import { formatMoney } from "@/utils/format";
-import { useProfile } from '@/state/profile';
+import { useMoney } from '@/hooks/use-money';
 
 const RADIUS = 78;
 const RING_THICKNESS = 21;
 const START_ANGLE = (-58 * Math.PI) / 180;
 
 export function ExpensesByCategory() {
-  const { currency } = useProfile();
+  const money = useMoney();
   const slices = expensesByCategory.map(({ value, color }) => ({
     value,
     color,
@@ -37,7 +36,7 @@ export function ExpensesByCategory() {
               <View style={[styles.dot, { backgroundColor: category.color }]} />
               <Text style={styles.legendLabel}>{category.label}</Text>
               <Text style={styles.legendValue}>
-                {formatMoney(category.value, currency)}
+                {money.format(category.value)}
               </Text>
             </View>
           ))}

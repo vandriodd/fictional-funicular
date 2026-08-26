@@ -113,8 +113,8 @@ export function TabBar({ state, navigation }: BottomTabBarProps) {
       <View style={styles.fabRow} pointerEvents="box-none">
         <Pressable
           accessibilityRole="button"
-          accessibilityLabel="Add transaction"
-          onPress={() => router.push("/add-transaction")}
+          accessibilityLabel="New movement"
+          onPress={() => router.push('/new-movement')}
           style={({ pressed }) => [
             styles.fab,
             Shadows.glow(Colors.accent),

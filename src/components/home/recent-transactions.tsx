@@ -2,12 +2,12 @@ import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { ArrowDownIcon, ArrowUpIcon } from '@/components/ui/icons';
 import { Colors, FontFamily, Radius, Shadows, Spacing } from '@/constants/theme';
-import { recentTransactions, type Transaction } from '@/data/mock';
-import { formatSignedMoney } from '@/utils/format';
-import { useProfile } from '@/state/profile';
+import type { Transaction } from '@/data/mock';
+import { useMoney } from '@/hooks/use-money';
+import { useTransactions } from '@/state/transactions';
 
 function TransactionRow({ transaction, isLast }: { transaction: Transaction; isLast: boolean }) {
-  const { currency } = useProfile();
+  const money = useMoney();
   const isIncoming = transaction.amount > 0;
   const Arrow = isIncoming ? ArrowUpIcon : ArrowDownIcon;
 
@@ -27,13 +27,15 @@ function TransactionRow({ transaction, isLast }: { transaction: Transaction; isL
       </View>
 
       <Text style={[styles.amount, isIncoming && styles.amountIncoming]}>
-        {formatSignedMoney(transaction.amount, currency)}
+        {money.formatSigned(transaction.amount, transaction.currency)}
       </Text>
     </View>
   );
 }
 
 export function RecentTransactions() {
+  const { transactions } = useTransactions();
+
   return (
     <View style={styles.section}>
       <View style={styles.header}>
@@ -44,11 +46,11 @@ export function RecentTransactions() {
       </View>
 
       <View style={styles.card}>
-        {recentTransactions.map((transaction, index) => (
+        {transactions.slice(0, 4).map((transaction, index) => (
           <TransactionRow
             key={transaction.id}
             transaction={transaction}
-            isLast={index === recentTransactions.length - 1}
+            isLast={index === Math.min(transactions.length, 4) - 1}
           />
         ))}
       </View>

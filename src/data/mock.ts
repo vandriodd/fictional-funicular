@@ -2,6 +2,7 @@
  * Mock data for the UI pass. Swap these for real queries once the API exists.
  */
 
+import type { CurrencyCode } from '@/constants/currencies';
 import { Colors } from '@/constants/theme';
 
 export const user = {
@@ -12,6 +13,7 @@ export const user = {
   unreadNotifications: 2,
 };
 
+/** Summary figures are held in the account's base currency. */
 export const monthlyBalance = {
   balance: 246_800,
   income: 285_000,
@@ -31,19 +33,37 @@ export const expensesByCategory: ExpenseCategory[] = [
   { label: 'Clothes', value: 7_200, color: Colors.accent },
 ];
 
+export type Category = {
+  id: string;
+  label: string;
+  emoji: string;
+};
+
+/** Offered when creating a movement. */
+export const CATEGORIES: Category[] = [
+  { id: 'food', label: 'Food', emoji: '🍔' },
+  { id: 'games', label: 'Games', emoji: '🎮' },
+  { id: 'clothes', label: 'Clothes', emoji: '👕' },
+  { id: 'home', label: 'Home', emoji: '🏠' },
+  { id: 'other', label: 'Other', emoji: '❓' },
+];
+
 export type Transaction = {
   id: string;
   title: string;
   date: string;
   /** Signed: positive is money in, negative is money out. */
   amount: number;
+  /** The currency the movement was created in. Display converts from this. */
+  currency: CurrencyCode;
+  categoryId: string;
 };
 
 export const recentTransactions: Transaction[] = [
-  { id: 'txn-1', title: 'Salary', date: 'Aug 22, 2026', amount: 185_000 },
-  { id: 'txn-2', title: 'Netflix', date: 'Aug 21, 2026', amount: -520 },
-  { id: 'txn-3', title: 'Uber', date: 'Aug 20, 2026', amount: -320 },
-  { id: 'txn-4', title: 'Refund · Zara', date: 'Aug 18, 2026', amount: 1_250 },
+  { id: 'txn-1', title: 'Salary', date: 'Aug 22, 2026', amount: 185_000, currency: 'MUR', categoryId: 'other' },
+  { id: 'txn-2', title: 'Netflix', date: 'Aug 21, 2026', amount: -520, currency: 'MUR', categoryId: 'games' },
+  { id: 'txn-3', title: 'Uber', date: 'Aug 20, 2026', amount: -320, currency: 'MUR', categoryId: 'other' },
+  { id: 'txn-4', title: 'Refund · Zara', date: 'Aug 18, 2026', amount: 1_250, currency: 'MUR', categoryId: 'clothes' },
 ];
 
 export type DailySpend = {

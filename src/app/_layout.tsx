@@ -12,7 +12,8 @@ import { StatusBar } from "expo-status-bar";
 import { useEffect } from "react";
 
 import { Colors, Radius } from "@/constants/theme";
-import { ProfileProvider } from "@/state/profile";
+import { ProfileProvider } from '@/state/profile';
+import { TransactionsProvider } from '@/state/transactions';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -57,6 +58,7 @@ export default function RootLayout() {
 
   return (
     <ProfileProvider>
+      <TransactionsProvider>
       <ThemeProvider value={navigationTheme}>
         <StatusBar style="dark" />
         <Stack
@@ -67,10 +69,6 @@ export default function RootLayout() {
         >
           <Stack.Screen name="(auth)" />
           <Stack.Screen name="(tabs)" />
-          <Stack.Screen
-            name="add-transaction"
-            options={{ presentation: "modal" }}
-          />
           <Stack.Screen name="edit-name" options={sheetOptions} />
           <Stack.Screen name="profile-icon" options={sheetOptions} />
           <Stack.Screen name="change-email" options={sheetOptions} />
@@ -78,6 +76,7 @@ export default function RootLayout() {
           <Stack.Screen name="log-out" options={sheetOptions} />
         </Stack>
       </ThemeProvider>
+      </TransactionsProvider>
     </ProfileProvider>
   );
 }

@@ -2,25 +2,24 @@ import { StyleSheet, Text, View } from 'react-native';
 
 import { Colors, FontFamily, Radius, Spacing } from '@/constants/theme';
 import { monthlyBalance } from '@/data/mock';
-import { formatMoney } from '@/utils/format';
-import { useProfile } from '@/state/profile';
+import { useMoney } from '@/hooks/use-money';
 
 export function BalanceCard() {
-  const { currency } = useProfile();
+  const money = useMoney();
 
   return (
     <View style={styles.card}>
       <Text style={styles.caption}>Balance of month</Text>
-      <Text style={styles.balance}>{formatMoney(monthlyBalance.balance, currency)}</Text>
+      <Text style={styles.balance}>{money.format(monthlyBalance.balance)}</Text>
 
       <View style={styles.breakdown}>
         <View style={styles.column}>
           <Text style={styles.caption}>Income</Text>
-          <Text style={styles.amount}>{formatMoney(monthlyBalance.income, currency)}</Text>
+          <Text style={styles.amount}>{money.format(monthlyBalance.income)}</Text>
         </View>
         <View style={styles.column}>
           <Text style={styles.caption}>Outcome</Text>
-          <Text style={styles.amount}>{formatMoney(monthlyBalance.outcome, currency)}</Text>
+          <Text style={styles.amount}>{money.format(monthlyBalance.outcome)}</Text>
         </View>
       </View>
     </View>
