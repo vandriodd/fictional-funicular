@@ -17,7 +17,7 @@ import { ArrowDownIcon, ArrowUpIcon, ChevronLeftIcon } from '@/components/ui/ico
 import { PrimaryButton } from '@/components/ui/primary-button';
 import { type CurrencyCode } from '@/constants/currencies';
 import { Colors, FontFamily, Radius, ScreenPadding, Shadows, Spacing } from '@/constants/theme';
-import { CATEGORIES } from '@/data/mock';
+import { CATEGORIES, QUICK_CATEGORY_IDS } from '@/data/mock';
 import { useProfile } from '@/state/profile';
 import { useTransactions } from '@/state/transactions';
 
@@ -33,7 +33,7 @@ export default function NewMovementScreen() {
   const [currency, setCurrency] = useState<CurrencyCode>(displayCurrency);
   const [title, setTitle] = useState('');
   const [type, setType] = useState<MovementType>('outcome');
-  const [categoryId, setCategoryId] = useState(CATEGORIES[0].id);
+  const [categoryId, setCategoryId] = useState(QUICK_CATEGORY_IDS[0]);
 
   const parsedAmount = Number(amount);
   const canCreate = parsedAmount > 0 && title.trim().length > 0;
@@ -116,7 +116,7 @@ export default function NewMovementScreen() {
         <View style={styles.section}>
           <Text style={styles.sectionLabel}>Category</Text>
           <View style={styles.categoryRow}>
-            {CATEGORIES.map((category) => {
+            {QUICK_CATEGORY_IDS.map((id) => CATEGORIES.find((c) => c.id === id)!).map((category) => {
               const selected = category.id === categoryId;
               return (
                 <Pressable

@@ -429,3 +429,25 @@ export function LogOutIcon({ size, color, ...rest }: IconProps) {
     </IconBase>
   );
 }
+
+export function SearchIcon({ size, color, ...rest }: IconProps) {
+  return (
+    <IconBase size={size} {...rest}>
+      <Circle cx={11} cy={11} r={7.4} stroke={color} strokeWidth={STROKE_WIDTH} />
+      <Path d="m16.4 16.4 4.2 4.2" stroke={color} strokeWidth={STROKE_WIDTH} strokeLinecap="round" />
+    </IconBase>
+  );
+}
+
+export function FilterIcon({ size, color, ...rest }: IconProps) {
+  return (
+    <IconBase size={size} {...rest}>
+      <Path
+        d="M4 7.5h16M7 12h10M10 16.5h4"
+        stroke={color}
+        strokeWidth={2.4}
+        strokeLinecap="round"
+      />
+    </IconBase>
+  );
+}

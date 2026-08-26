@@ -39,14 +39,26 @@ export type Category = {
   emoji: string;
 };
 
-/** Offered when creating a movement. */
 export const CATEGORIES: Category[] = [
   { id: 'food', label: 'Food', emoji: '🍔' },
-  { id: 'games', label: 'Games', emoji: '🎮' },
+  { id: 'groceries', label: 'Groceries', emoji: '🛒' },
+  { id: 'transport', label: 'Transport', emoji: '🚗' },
+  { id: 'entertainment', label: 'Entertainment', emoji: '🎮' },
+  { id: 'health', label: 'Health', emoji: '💊' },
+  { id: 'dessert', label: 'Dessert', emoji: '🍰' },
+  { id: 'utilities', label: 'Utilities', emoji: '💡' },
   { id: 'clothes', label: 'Clothes', emoji: '👕' },
   { id: 'home', label: 'Home', emoji: '🏠' },
+  { id: 'income', label: 'Income', emoji: '💰' },
   { id: 'other', label: 'Other', emoji: '❓' },
 ];
+
+/** The five tiles offered on the New Movement screen. */
+export const QUICK_CATEGORY_IDS = ['food', 'entertainment', 'clothes', 'home', 'other'];
+
+export function getCategory(id: string) {
+  return CATEGORIES.find((category) => category.id === id) ?? CATEGORIES[CATEGORIES.length - 1];
+}
 
 export type Transaction = {
   id: string;
@@ -57,13 +69,22 @@ export type Transaction = {
   /** The currency the movement was created in. Display converts from this. */
   currency: CurrencyCode;
   categoryId: string;
+  /** Merchant-specific icon; falls back to the category's emoji. */
+  emoji?: string;
 };
 
-export const recentTransactions: Transaction[] = [
-  { id: 'txn-1', title: 'Salary', date: 'Aug 22, 2026', amount: 185_000, currency: 'MUR', categoryId: 'other' },
-  { id: 'txn-2', title: 'Netflix', date: 'Aug 21, 2026', amount: -520, currency: 'MUR', categoryId: 'games' },
-  { id: 'txn-3', title: 'Uber', date: 'Aug 20, 2026', amount: -320, currency: 'MUR', categoryId: 'other' },
-  { id: 'txn-4', title: 'Refund · Zara', date: 'Aug 18, 2026', amount: 1_250, currency: 'MUR', categoryId: 'clothes' },
+export const transactions: Transaction[] = [
+  { id: 'txn-1', title: 'Salary', date: 'Aug 22, 2026', amount: 185_000, currency: 'MUR', categoryId: 'income' },
+  { id: 'txn-2', title: 'Burger King', date: 'Aug 22, 2026', amount: -450, currency: 'MUR', categoryId: 'food' },
+  { id: 'txn-3', title: 'Winners Supermarket', date: 'Aug 22, 2026', amount: -2_150, currency: 'MUR', categoryId: 'groceries' },
+  { id: 'txn-4', title: 'Uber', date: 'Aug 22, 2026', amount: -320, currency: 'MUR', categoryId: 'transport' },
+  { id: 'txn-5', title: 'Netflix', date: 'Aug 22, 2026', amount: -520, currency: 'MUR', categoryId: 'entertainment' },
+  { id: 'txn-6', title: 'Pharmacie Centrale', date: 'Aug 22, 2026', amount: -890, currency: 'MUR', categoryId: 'health' },
+  { id: 'txn-7', title: 'Café Lux', date: 'Aug 22, 2026', amount: -180, currency: 'MUR', categoryId: 'dessert' },
+  { id: 'txn-8', title: 'Refund · Zara', date: 'Aug 18, 2026', amount: 1_250, currency: 'MUR', categoryId: 'clothes' },
+  { id: 'txn-9', title: 'CEB Electricity', date: 'Aug 15, 2026', amount: -1_750, currency: 'MUR', categoryId: 'utilities' },
+  { id: 'txn-10', title: 'Zara', date: 'Aug 15, 2026', amount: -2_400, currency: 'MUR', categoryId: 'clothes' },
+  { id: 'txn-11', title: 'Emtel Mobile', date: 'Aug 15, 2026', amount: -650, currency: 'MUR', categoryId: 'utilities', emoji: '📱' },
 ];
 
 export type DailySpend = {

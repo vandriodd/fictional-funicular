@@ -1,6 +1,6 @@
 import { createContext, use, useCallback, useMemo, useState, type ReactNode } from 'react';
 
-import { recentTransactions, type Transaction } from '@/data/mock';
+import { transactions as seedTransactions, type Transaction } from '@/data/mock';
 
 type TransactionsContextValue = {
   transactions: Transaction[];
@@ -18,7 +18,7 @@ function today() {
 }
 
 export function TransactionsProvider({ children }: { children: ReactNode }) {
-  const [transactions, setTransactions] = useState<Transaction[]>(recentTransactions);
+  const [transactions, setTransactions] = useState<Transaction[]>(seedTransactions);
 
   const addTransaction = useCallback((transaction: Omit<Transaction, 'id' | 'date'>) => {
     setTransactions((current) => [

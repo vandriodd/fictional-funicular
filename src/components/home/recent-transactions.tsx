@@ -1,5 +1,7 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
+import { useRouter } from 'expo-router';
+
 import { ArrowDownIcon, ArrowUpIcon } from '@/components/ui/icons';
 import { Colors, FontFamily, Radius, Shadows, Spacing } from '@/constants/theme';
 import type { Transaction } from '@/data/mock';
@@ -34,13 +36,17 @@ function TransactionRow({ transaction, isLast }: { transaction: Transaction; isL
 }
 
 export function RecentTransactions() {
+  const router = useRouter();
   const { transactions } = useTransactions();
 
   return (
     <View style={styles.section}>
       <View style={styles.header}>
         <Text style={styles.heading}>Recent transactions</Text>
-        <Pressable accessibilityRole="button" hitSlop={8}>
+        <Pressable
+          accessibilityRole="button"
+          onPress={() => router.push('/history')}
+          hitSlop={8}>
           <Text style={styles.viewAll}>View all</Text>
         </Pressable>
       </View>
