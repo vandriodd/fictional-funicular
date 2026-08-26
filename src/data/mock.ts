@@ -4,8 +4,6 @@
 
 import { Colors } from '@/constants/theme';
 
-export const CURRENCY = 'MUR';
-
 export const user = {
   firstName: 'Sofía',
   fullName: 'Sofía García',
@@ -61,4 +59,15 @@ export const last7Days: DailySpend[] = [
   { label: 'Aug 20', value: 7_000 },
   { label: 'Aug 21', value: 7_050 },
   { label: 'Aug 22', value: 7_100 },
+];
+
+/** Shown until someone picks another emoji. */
+export const DEFAULT_AVATAR_EMOJI = '🐙';
+
+/** Grid offered by the "Change profile icon" sheet. */
+export const PROFILE_EMOJIS = [
+  '🐙', '🦊', '🐼', '🦁', '🐸', '🐧',
+  '🦄', '🐝', '🦋', '🐳', '🌵', '🍄',
+  '🌻', '🍕', '🚀', '⚡', '🎧', '🎸',
+  '🏀', '⚽', '🧠', '👾', '🎨', '✨',
 ];

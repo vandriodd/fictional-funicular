@@ -1,14 +1,19 @@
-import { Image } from "expo-image";
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { useRouter } from 'expo-router';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 
-import { Wordmark } from "@/components/brand/wordmark";
-import { BellIcon } from "@/components/ui/icons";
-import { Colors, FontFamily, Radius, Spacing } from "@/constants/theme";
-import { user } from "@/data/mock";
+import { Wordmark } from '@/components/brand/wordmark';
+import { ProfileAvatar } from '@/components/profile/profile-avatar';
+import { BellIcon } from '@/components/ui/icons';
+import { Colors, FontFamily, Radius, Spacing } from '@/constants/theme';
+import { user } from '@/data/mock';
+import { useProfile } from '@/state/profile';
 
 const AVATAR_SIZE = 42;
 
 export function HomeHeader() {
+  const router = useRouter();
+  const { name } = useProfile();
+
   return (
     <View style={styles.container}>
       <View style={styles.topRow}>
@@ -25,20 +30,17 @@ export function HomeHeader() {
             {user.unreadNotifications > 0 && <View style={styles.badge} />}
           </Pressable>
 
-          <View style={styles.avatarRing}>
-            <Text style={styles.avatarInitials}>SG</Text>
-            <Image
-              source={{ uri: user.avatarUrl }}
-              style={StyleSheet.absoluteFill}
-              contentFit="cover"
-              transition={200}
-              accessibilityLabel={user.fullName}
-            />
-          </View>
+          <Pressable
+            accessibilityRole="button"
+            accessibilityLabel={`Profile, ${name}`}
+            onPress={() => router.push('/profile')}
+            style={({ pressed }) => pressed && styles.pressed}>
+            <ProfileAvatar size={AVATAR_SIZE} />
+          </Pressable>
         </View>
       </View>
 
-      <Text style={styles.greeting}>Hello, {user.firstName}</Text>
+      <Text style={styles.greeting}>Hello, {name.split(' ')[0]}</Text>
       <Text style={styles.title}>Here&rsquo;s how it&rsquo;s going</Text>
     </View>
   );
@@ -76,19 +78,8 @@ const styles = StyleSheet.create({
     borderRadius: Radius.pill,
     backgroundColor: Colors.accent,
   },
-  avatarRing: {
-    width: AVATAR_SIZE,
-    height: AVATAR_SIZE,
-    borderRadius: Radius.pill,
-    backgroundColor: Colors.primaryLight,
-    alignItems: "center",
-    justifyContent: "center",
-    overflow: "hidden",
-  },
-  avatarInitials: {
-    fontFamily: FontFamily.bold,
-    fontSize: 14,
-    color: Colors.white,
+  pressed: {
+    opacity: 0.75,
   },
   greeting: {
     fontFamily: FontFamily.medium,

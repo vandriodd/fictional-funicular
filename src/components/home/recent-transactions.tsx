@@ -4,8 +4,10 @@ import { ArrowDownIcon, ArrowUpIcon } from '@/components/ui/icons';
 import { Colors, FontFamily, Radius, Shadows, Spacing } from '@/constants/theme';
 import { recentTransactions, type Transaction } from '@/data/mock';
 import { formatSignedMoney } from '@/utils/format';
+import { useProfile } from '@/state/profile';
 
 function TransactionRow({ transaction, isLast }: { transaction: Transaction; isLast: boolean }) {
+  const { currency } = useProfile();
   const isIncoming = transaction.amount > 0;
   const Arrow = isIncoming ? ArrowUpIcon : ArrowDownIcon;
 
@@ -25,7 +27,7 @@ function TransactionRow({ transaction, isLast }: { transaction: Transaction; isL
       </View>
 
       <Text style={[styles.amount, isIncoming && styles.amountIncoming]}>
-        {formatSignedMoney(transaction.amount)}
+        {formatSignedMoney(transaction.amount, currency)}
       </Text>
     </View>
   );

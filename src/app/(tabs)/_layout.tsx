@@ -19,6 +19,8 @@ export default function TabsLayout() {
       <Tabs.Screen name="history" options={{ title: 'History' }} />
       <Tabs.Screen name="goals" options={{ title: 'Goals' }} />
       <Tabs.Screen name="tags" options={{ title: 'Tags' }} />
+      {/* Reachable from the home avatar; the custom tab bar has no button for it. */}
+      <Tabs.Screen name="profile" options={{ title: 'Profile' }} />
     </Tabs>
   );
 }

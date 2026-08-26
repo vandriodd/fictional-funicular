@@ -13,6 +13,7 @@ import {
 } from "@/constants/theme";
 import { last7Days } from "@/data/mock";
 import { formatMoney } from "@/utils/format";
+import { useProfile } from '@/state/profile';
 
 const CARD_PADDING = 16;
 const BAR_WIDTH = 22;
@@ -38,6 +39,7 @@ function CalloutCaret({ pointing }: { pointing: "left" | "right" }) {
 
 export function WeeklySpending() {
   const { width } = useWindowDimensions();
+  const { currency } = useProfile();
   const [pressedIndex, setPressedIndex] = useState<number | null>(null);
 
   const chartWidth = width - ScreenPadding * 2 - CARD_PADDING * 2;
@@ -80,7 +82,7 @@ export function WeeklySpending() {
       >
         {!flipped && <CalloutCaret pointing="left" />}
         <View style={styles.calloutPill}>
-          <Text style={styles.calloutText}>{formatMoney(day.value)}</Text>
+          <Text style={styles.calloutText}>{formatMoney(day.value, currency)}</Text>
         </View>
         {flipped && <CalloutCaret pointing="right" />}
       </View>

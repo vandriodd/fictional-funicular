@@ -5,15 +5,24 @@ import {
   Outfit_700Bold,
   Outfit_800ExtraBold,
   useFonts,
-} from '@expo-google-fonts/outfit';
-import { DefaultTheme, Stack, ThemeProvider } from 'expo-router';
-import * as SplashScreen from 'expo-splash-screen';
-import { StatusBar } from 'expo-status-bar';
-import { useEffect } from 'react';
+} from "@expo-google-fonts/outfit";
+import { DefaultTheme, Stack, ThemeProvider } from "expo-router";
+import * as SplashScreen from "expo-splash-screen";
+import { StatusBar } from "expo-status-bar";
+import { useEffect } from "react";
 
-import { Colors } from '@/constants/theme';
+import { Colors, Radius } from "@/constants/theme";
+import { ProfileProvider } from "@/state/profile";
 
 SplashScreen.preventAutoHideAsync();
+
+const sheetOptions = {
+  presentation: "formSheet",
+  sheetAllowedDetents: "fitToContents",
+  sheetGrabberVisible: true,
+  sheetCornerRadius: Radius.xxl,
+  contentStyle: { backgroundColor: Colors.surface },
+} as const;
 
 const navigationTheme = {
   ...DefaultTheme,
@@ -47,17 +56,28 @@ export default function RootLayout() {
   }
 
   return (
-    <ThemeProvider value={navigationTheme}>
-      <StatusBar style="dark" />
-      <Stack
-        screenOptions={{
-          headerShown: false,
-          contentStyle: { backgroundColor: Colors.background },
-        }}>
-        <Stack.Screen name="(auth)" />
-        <Stack.Screen name="(tabs)" />
-        <Stack.Screen name="add-transaction" options={{ presentation: 'modal' }} />
-      </Stack>
-    </ThemeProvider>
+    <ProfileProvider>
+      <ThemeProvider value={navigationTheme}>
+        <StatusBar style="dark" />
+        <Stack
+          screenOptions={{
+            headerShown: false,
+            contentStyle: { backgroundColor: Colors.background },
+          }}
+        >
+          <Stack.Screen name="(auth)" />
+          <Stack.Screen name="(tabs)" />
+          <Stack.Screen
+            name="add-transaction"
+            options={{ presentation: "modal" }}
+          />
+          <Stack.Screen name="edit-name" options={sheetOptions} />
+          <Stack.Screen name="profile-icon" options={sheetOptions} />
+          <Stack.Screen name="change-email" options={sheetOptions} />
+          <Stack.Screen name="change-password" options={sheetOptions} />
+          <Stack.Screen name="log-out" options={sheetOptions} />
+        </Stack>
+      </ThemeProvider>
+    </ProfileProvider>
   );
 }

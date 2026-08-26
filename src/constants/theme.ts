@@ -19,6 +19,10 @@ export const Colors = {
   accentPressed: '#DB4A03',
   accentSurface: '#FFECE2',
 
+  /** Destructive confirmation. */
+  danger: '#E74C3C',
+  dangerPressed: '#CF3B2C',
+
   /** Headings and primary copy. */
   ink: '#212529',
   /** Wordmark on the auth screens. */
