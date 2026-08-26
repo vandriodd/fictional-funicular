@@ -451,3 +451,23 @@ export function FilterIcon({ size, color, ...rest }: IconProps) {
     </IconBase>
   );
 }
+
+export function EditIcon({ size, color, ...rest }: IconProps) {
+  return (
+    <IconBase size={size} {...rest}>
+      <Path
+        d="M11 4.2H5.4a2.4 2.4 0 0 0-2.4 2.4v12a2.4 2.4 0 0 0 2.4 2.4h12a2.4 2.4 0 0 0 2.4-2.4V13"
+        stroke={color}
+        strokeWidth={STROKE_WIDTH}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <Path
+        d="M17.6 2.9a2.1 2.1 0 0 1 3 3l-8.4 8.4-3.9.9.9-3.9z"
+        stroke={color}
+        strokeWidth={STROKE_WIDTH}
+        strokeLinejoin="round"
+      />
+    </IconBase>
+  );
+}

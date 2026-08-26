@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { ProfileAvatar } from '@/components/profile/profile-avatar';
+import { Emoji } from '@/components/ui/emoji';
 import { SheetScaffold } from '@/components/ui/sheet-scaffold';
 import { Colors, Radius, Spacing } from '@/constants/theme';
 import { PROFILE_EMOJIS } from '@/data/mock';
@@ -41,7 +42,7 @@ export default function ProfileIconSheet() {
                 isSelected && styles.tileSelected,
                 pressed && styles.tilePressed,
               ]}>
-              <Text style={styles.emoji}>{emoji}</Text>
+              <Emoji char={emoji} size={24} />
             </Pressable>
           );
         })}
@@ -78,8 +79,5 @@ const styles = StyleSheet.create({
   },
   tilePressed: {
     opacity: 0.7,
-  },
-  emoji: {
-    fontSize: 24,
   },
 });

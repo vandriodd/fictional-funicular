@@ -13,6 +13,7 @@ import { useEffect } from "react";
 
 import { Colors, Radius } from "@/constants/theme";
 import { ProfileProvider } from '@/state/profile';
+import { CategoriesProvider } from '@/state/categories';
 import { TransactionsProvider } from '@/state/transactions';
 
 SplashScreen.preventAutoHideAsync();
@@ -58,7 +59,8 @@ export default function RootLayout() {
 
   return (
     <ProfileProvider>
-      <TransactionsProvider>
+      <CategoriesProvider>
+        <TransactionsProvider>
       <ThemeProvider value={navigationTheme}>
         <StatusBar style="dark" />
         <Stack
@@ -77,6 +79,7 @@ export default function RootLayout() {
         </Stack>
       </ThemeProvider>
       </TransactionsProvider>
+        </CategoriesProvider>
     </ProfileProvider>
   );
 }

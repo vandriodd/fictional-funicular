@@ -18,10 +18,11 @@ export default function TabsLayout() {
       <Tabs.Screen name="home" options={{ title: 'Home' }} />
       <Tabs.Screen name="history" options={{ title: 'History' }} />
       <Tabs.Screen name="goals" options={{ title: 'Goals' }} />
-      <Tabs.Screen name="tags" options={{ title: 'Tags' }} />
+      <Tabs.Screen name="categories" options={{ title: 'Categories' }} />
       {/* Reached from the home avatar and the add button; neither has a tab button. */}
       <Tabs.Screen name="profile" options={{ title: 'Profile' }} />
       <Tabs.Screen name="new-movement" options={{ title: 'New Movement' }} />
+      <Tabs.Screen name="new-category" options={{ title: 'New Category' }} />
     </Tabs>
   );
 }

@@ -1,6 +1,7 @@
 import { Image } from 'expo-image';
 import { StyleSheet, Text, View, type StyleProp, type ViewStyle } from 'react-native';
 
+import { Emoji } from '@/components/ui/emoji';
 import { Colors, FontFamily, Radius } from '@/constants/theme';
 import { user } from '@/data/mock';
 import { getInitials, useProfile } from '@/state/profile';
@@ -33,7 +34,7 @@ export function ProfileAvatar({ size, ringWidth, emoji, style }: ProfileAvatarPr
         style,
       ]}>
       {shown ? (
-        <Text style={{ fontSize: size * 0.5 }}>{shown}</Text>
+        <Emoji char={shown} size={size * 0.5} />
       ) : (
         <>
           {/* Doubles as the placeholder while the remote photo loads. */}

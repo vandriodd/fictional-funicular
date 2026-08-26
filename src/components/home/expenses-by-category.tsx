@@ -2,7 +2,8 @@ import { StyleSheet, Text, View } from "react-native";
 import { PieChart } from "react-native-gifted-charts";
 
 import { Colors, FontFamily, Radius, Spacing } from "@/constants/theme";
-import { expensesByCategory } from "@/data/mock";
+import { expensesByCategory } from '@/data/mock';
+import { useCategories } from '@/state/categories';
 import { useMoney } from '@/hooks/use-money';
 
 const RADIUS = 78;
@@ -11,9 +12,10 @@ const START_ANGLE = (-58 * Math.PI) / 180;
 
 export function ExpensesByCategory() {
   const money = useMoney();
-  const slices = expensesByCategory.map(({ value, color }) => ({
+  const { getCategory } = useCategories();
+  const slices = expensesByCategory.map(({ categoryId, value }) => ({
     value,
-    color,
+    color: getCategory(categoryId).color,
   }));
 
   return (
@@ -31,15 +33,16 @@ export function ExpensesByCategory() {
         />
 
         <View style={styles.legend}>
-          {expensesByCategory.map((category) => (
-            <View key={category.label} style={styles.legendRow}>
-              <View style={[styles.dot, { backgroundColor: category.color }]} />
-              <Text style={styles.legendLabel}>{category.label}</Text>
-              <Text style={styles.legendValue}>
-                {money.format(category.value)}
-              </Text>
-            </View>
-          ))}
+          {expensesByCategory.map(({ categoryId, value }) => {
+            const category = getCategory(categoryId);
+            return (
+              <View key={categoryId} style={styles.legendRow}>
+                <View style={[styles.dot, { backgroundColor: category.color }]} />
+                <Text style={styles.legendLabel}>{category.label}</Text>
+                <Text style={styles.legendValue}>{money.format(value)}</Text>
+              </View>
+            );
+          })}
         </View>
       </View>
     </View>

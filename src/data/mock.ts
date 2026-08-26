@@ -20,45 +20,86 @@ export const monthlyBalance = {
   outcome: 38_200,
 };
 
-export type ExpenseCategory = {
-  label: string;
+export type ExpenseSlice = {
+  categoryId: string;
   value: number;
-  color: string;
 };
 
 /** Sums to `monthlyBalance.outcome`. */
-export const expensesByCategory: ExpenseCategory[] = [
-  { label: 'Food', value: 18_400, color: Colors.primary },
-  { label: 'Home', value: 12_600, color: Colors.primaryLight },
-  { label: 'Clothes', value: 7_200, color: Colors.accent },
+export const expensesByCategory: ExpenseSlice[] = [
+  { categoryId: 'food', value: 18_400 },
+  { categoryId: 'home', value: 12_600 },
+  { categoryId: 'clothes', value: 7_200 },
 ];
 
 export type Category = {
   id: string;
   label: string;
   emoji: string;
+  /** Identity colour — what the category is drawn with in charts. */
+  color: string;
+  /** Custom categories are the ones the user created and can edit. */
+  isCustom?: boolean;
 };
 
-export const CATEGORIES: Category[] = [
-  { id: 'food', label: 'Food', emoji: '🍔' },
-  { id: 'groceries', label: 'Groceries', emoji: '🛒' },
-  { id: 'transport', label: 'Transport', emoji: '🚗' },
-  { id: 'entertainment', label: 'Entertainment', emoji: '🎮' },
-  { id: 'health', label: 'Health', emoji: '💊' },
-  { id: 'dessert', label: 'Dessert', emoji: '🍰' },
-  { id: 'utilities', label: 'Utilities', emoji: '💡' },
-  { id: 'clothes', label: 'Clothes', emoji: '👕' },
-  { id: 'home', label: 'Home', emoji: '🏠' },
-  { id: 'income', label: 'Income', emoji: '💰' },
-  { id: 'other', label: 'Other', emoji: '❓' },
+export const DEFAULT_CATEGORIES: Category[] = [
+  { id: 'food', label: 'Food', emoji: '🍔', color: Colors.primary },
+  { id: 'entertainment', label: 'Entertainment', emoji: '🎮', color: Colors.primaryLight },
+  { id: 'clothes', label: 'Clothes', emoji: '👕', color: Colors.accent },
+  { id: 'home', label: 'Home', emoji: '🏠', color: Colors.primaryLight },
+  { id: 'health', label: 'Health', emoji: '💊', color: Colors.primary },
+  { id: 'transport', label: 'Transport', emoji: '🚗', color: Colors.accentLight },
+  { id: 'groceries', label: 'Groceries', emoji: '🛒', color: Colors.primaryLight },
+  { id: 'dessert', label: 'Dessert', emoji: '🍰', color: Colors.accentLight },
+  { id: 'utilities', label: 'Utilities', emoji: '💡', color: Colors.primary },
+  { id: 'income', label: 'Income', emoji: '💰', color: Colors.primary },
+  { id: 'other', label: 'Other', emoji: '❓', color: Colors.ink },
+];
+
+/** Seeded so the Categories screen has something under CUSTOM. */
+export const SEED_CUSTOM_CATEGORIES: Category[] = [
+  { id: 'subscriptions', label: 'Subscriptions', emoji: '💳', color: Colors.primary, isCustom: true },
+  { id: 'holberton', label: 'Holberton', emoji: '🎓', color: Colors.accent, isCustom: true },
+];
+
+/** Icons offered when creating a category, grouped so the list stays browsable. */
+export const CATEGORY_ICON_GROUPS: { label: string; icons: string[] }[] = [
+  { label: 'Money', icons: ['💰', '💳', '🧾', '🏦', '💵', '🪙', '📈', '🎁', '💎', '🏧', '📊', '🤑'] },
+  { label: 'Food & drink', icons: ['🍔', '🍕', '🥗', '🍰', '☕', '🍺', '🛒', '🍜', '🥐', '🍣', '🍫', '🥤'] },
+  { label: 'Home & bills', icons: ['🏠', '💡', '🚿', '🔌', '🧹', '🛋️', '🔧', '📱', '📶', '🔑', '🪴', '🧺'] },
+  { label: 'Transport', icons: ['🚗', '🚌', '✈️', '⛽', '🚲', '🚕', '🛵', '🅿️', '🚆', '🛳️', '🛞', '🗺️'] },
+  { label: 'Health', icons: ['💊', '🏥', '🦷', '🧘', '🩺', '💪', '🧴', '🤒', '🏋️', '🥑', '😴', '🧠'] },
+  { label: 'Fun', icons: ['🎮', '🎬', '🎧', '🎸', '⚽', '🎨', '📚', '🎟️', '🏀', '🎲', '🎤', '📷'] },
+  { label: 'Life', icons: ['👕', '👟', '🎓', '🐶', '🌱', '✂️', '🧳', '🛡️', '👶', '🎂', '💐', '🐱'] },
+  { label: 'Other', icons: ['⭐', '❤️', '🔥', '✨', '📌', '🧩', '🪄', '❓', '🔔', '🏷️', '📎', '🌀'] },
+];
+
+export const CATEGORY_ICONS = CATEGORY_ICON_GROUPS.flatMap((group) => group.icons);
+
+/** Colours offered when creating a category. Brand colours lead the palette. */
+export const CATEGORY_COLORS = [
+  Colors.primary,
+  Colors.primaryLight,
+  Colors.accent,
+  Colors.accentLight,
+  Colors.ink,
+  '#5B21B6',
+  '#3B82F6',
+  '#0EA5E9',
+  '#06B6D4',
+  '#10B981',
+  '#22C55E',
+  '#84CC16',
+  '#EAB308',
+  '#F59E0B',
+  '#EF4444',
+  '#EC4899',
+  '#A855F7',
+  '#64748B',
 ];
 
 /** The five tiles offered on the New Movement screen. */
 export const QUICK_CATEGORY_IDS = ['food', 'entertainment', 'clothes', 'home', 'other'];
-
-export function getCategory(id: string) {
-  return CATEGORIES.find((category) => category.id === id) ?? CATEGORIES[CATEGORIES.length - 1];
-}
 
 export type Transaction = {
   id: string;

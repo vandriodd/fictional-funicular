@@ -13,11 +13,13 @@ import {
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { CurrencyDropdown } from '@/components/profile/currency-dropdown';
+import { Emoji } from '@/components/ui/emoji';
 import { ArrowDownIcon, ArrowUpIcon, ChevronLeftIcon } from '@/components/ui/icons';
 import { PrimaryButton } from '@/components/ui/primary-button';
 import { type CurrencyCode } from '@/constants/currencies';
 import { Colors, FontFamily, Radius, ScreenPadding, Shadows, Spacing } from '@/constants/theme';
-import { CATEGORIES, QUICK_CATEGORY_IDS } from '@/data/mock';
+import { QUICK_CATEGORY_IDS } from '@/data/mock';
+import { useCategories } from '@/state/categories';
 import { useProfile } from '@/state/profile';
 import { useTransactions } from '@/state/transactions';
 
@@ -28,6 +30,7 @@ export default function NewMovementScreen() {
   const router = useRouter();
   const { currency: displayCurrency } = useProfile();
   const { addTransaction } = useTransactions();
+  const { getCategory } = useCategories();
 
   const [amount, setAmount] = useState('');
   const [currency, setCurrency] = useState<CurrencyCode>(displayCurrency);
@@ -45,7 +48,12 @@ export default function NewMovementScreen() {
       currency,
       categoryId,
     });
-    router.back();
+    // The tab screen stays mounted, so the form has to be cleared explicitly.
+    setAmount('');
+    setTitle('');
+    setType('outcome');
+    setCategoryId(QUICK_CATEGORY_IDS[0]);
+    router.replace('/home');
   };
 
   const goBack = () => (router.canGoBack() ? router.back() : router.replace('/home'));
@@ -116,7 +124,7 @@ export default function NewMovementScreen() {
         <View style={styles.section}>
           <Text style={styles.sectionLabel}>Category</Text>
           <View style={styles.categoryRow}>
-            {QUICK_CATEGORY_IDS.map((id) => CATEGORIES.find((c) => c.id === id)!).map((category) => {
+            {QUICK_CATEGORY_IDS.map(getCategory).map((category) => {
               const selected = category.id === categoryId;
               return (
                 <Pressable
@@ -130,7 +138,7 @@ export default function NewMovementScreen() {
                     selected && styles.categoryTileSelected,
                     pressed && styles.pressed,
                   ]}>
-                  <Text style={styles.categoryEmoji}>{category.emoji}</Text>
+                  <Emoji char={category.emoji} size={26} />
                 </Pressable>
               );
             })}
@@ -302,9 +310,6 @@ const styles = StyleSheet.create({
   },
   categoryTileSelected: {
     backgroundColor: Colors.primary,
-  },
-  categoryEmoji: {
-    fontSize: 26,
   },
   cta: {
     marginTop: 'auto',

@@ -21,6 +21,8 @@ type TabDescriptor = {
   name: string;
   label: string;
   Icon: (props: IconProps) => React.ReactElement;
+  /** Sibling routes that keep this tab lit, e.g. a screen it pushes to. */
+  owns?: string[];
 };
 
 const LEFT_TABS: TabDescriptor[] = [
@@ -30,7 +32,7 @@ const LEFT_TABS: TabDescriptor[] = [
 
 const RIGHT_TABS: TabDescriptor[] = [
   { name: "goals", label: "Goals", Icon: GoalIcon },
-  { name: "tags", label: "Tags", Icon: TagIcon },
+  { name: 'categories', label: 'Categories', Icon: TagIcon, owns: ['new-category'] },
 ];
 
 function TabButton({
@@ -70,7 +72,8 @@ export function TabBar({ state, navigation }: BottomTabBarProps) {
     if (routeIndex === -1) return null;
 
     const route = state.routes[routeIndex];
-    const focused = state.index === routeIndex;
+    const activeName = state.routes[state.index]?.name;
+    const focused = activeName === tab.name || (tab.owns?.includes(activeName ?? '') ?? false);
 
     return (
       <TabButton

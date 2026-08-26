@@ -4,9 +4,11 @@ import { Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { TransactionFilterMenu, type MovementFilter } from '@/components/history/transaction-filter';
+import { Emoji } from '@/components/ui/emoji';
 import { ChevronLeftIcon, SearchIcon } from '@/components/ui/icons';
 import { Colors, FontFamily, Radius, ScreenPadding, Shadows, Spacing } from '@/constants/theme';
-import { getCategory, type Transaction } from '@/data/mock';
+import type { Transaction } from '@/data/mock';
+import { useCategories } from '@/state/categories';
 import { useMoney } from '@/hooks/use-money';
 import { useTransactions } from '@/state/transactions';
 
@@ -29,12 +31,8 @@ function groupByDate(items: Transaction[]): DateGroup[] {
   return groups;
 }
 
-function matches(transaction: Transaction, query: string) {
-  const haystack = [
-    transaction.title,
-    getCategory(transaction.categoryId).label,
-    String(Math.abs(transaction.amount)),
-  ]
+function matches(transaction: Transaction, categoryLabel: string, query: string) {
+  const haystack = [transaction.title, categoryLabel, String(Math.abs(transaction.amount))]
     .join(' ')
     .toLowerCase();
   return haystack.includes(query.trim().toLowerCase());
@@ -42,13 +40,14 @@ function matches(transaction: Transaction, query: string) {
 
 function TransactionCard({ transaction }: { transaction: Transaction }) {
   const money = useMoney();
+  const { getCategory } = useCategories();
   const category = getCategory(transaction.categoryId);
   const isIncoming = transaction.amount > 0;
 
   return (
     <View style={styles.card}>
       <View style={styles.emojiTile}>
-        <Text style={styles.emoji}>{transaction.emoji ?? category.emoji}</Text>
+        <Emoji char={transaction.emoji ?? category.emoji} size={24} />
       </View>
       <View style={styles.details}>
         <Text style={styles.title}>{transaction.title}</Text>
@@ -65,6 +64,7 @@ export default function HistoryScreen() {
   const insets = useSafeAreaInsets();
   const router = useRouter();
   const { transactions } = useTransactions();
+  const { getCategory } = useCategories();
 
   const [query, setQuery] = useState('');
   const [filter, setFilter] = useState<MovementFilter>('all');
@@ -73,10 +73,13 @@ export default function HistoryScreen() {
     const filtered = transactions.filter((transaction) => {
       if (filter === 'income' && transaction.amount <= 0) return false;
       if (filter === 'outcome' && transaction.amount > 0) return false;
-      return query.trim().length === 0 || matches(transaction, query);
+      return (
+        query.trim().length === 0 ||
+        matches(transaction, getCategory(transaction.categoryId).label, query)
+      );
     });
     return groupByDate(filtered);
-  }, [transactions, query, filter]);
+  }, [transactions, query, filter, getCategory]);
 
   const goBack = () => (router.canGoBack() ? router.back() : router.replace('/home'));
 
@@ -222,9 +225,6 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.primarySurface,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  emoji: {
-    fontSize: 24,
   },
   details: {
     flex: 1,

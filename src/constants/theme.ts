@@ -17,6 +17,7 @@ export const Colors = {
   /** Brand orange — sign up, FAB, "money out". */
   accent: '#FB5607',
   accentPressed: '#DB4A03',
+  accentLight: '#FD9A63',
   accentSurface: '#FFECE2',
 
   /** Destructive confirmation. */
