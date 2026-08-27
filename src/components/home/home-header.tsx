@@ -5,7 +5,7 @@ import { Wordmark } from '@/components/brand/wordmark';
 import { ProfileAvatar } from '@/components/profile/profile-avatar';
 import { BellIcon } from '@/components/ui/icons';
 import { Colors, FontFamily, Radius, Spacing } from '@/constants/theme';
-import { user } from '@/data/mock';
+import { useNotifications } from '@/state/notifications';
 import { useProfile } from '@/state/profile';
 
 const AVATAR_SIZE = 42;
@@ -13,6 +13,7 @@ const AVATAR_SIZE = 42;
 export function HomeHeader() {
   const router = useRouter();
   const { name } = useProfile();
+  const { unreadCount } = useNotifications();
 
   return (
     <View style={styles.container}>
@@ -22,12 +23,13 @@ export function HomeHeader() {
         <View style={styles.actions}>
           <Pressable
             accessibilityRole="button"
-            accessibilityLabel={`Notifications, ${user.unreadNotifications} unread`}
+            accessibilityLabel={`Notifications, ${unreadCount} unread`}
+            onPress={() => router.push('/notifications')}
             style={styles.bellButton}
             hitSlop={6}
           >
             <BellIcon size={21} color={Colors.textSecondary} />
-            {user.unreadNotifications > 0 && <View style={styles.badge} />}
+            {unreadCount > 0 && <View style={styles.badge} />}
           </Pressable>
 
           <Pressable

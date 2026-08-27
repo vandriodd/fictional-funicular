@@ -21,6 +21,7 @@ export default function TabsLayout() {
       <Tabs.Screen name="categories" options={{ title: 'Categories' }} />
       {/* Reached from the home avatar and the add button; neither has a tab button. */}
       <Tabs.Screen name="profile" options={{ title: 'Profile' }} />
+      <Tabs.Screen name="notifications" options={{ title: 'Notifications' }} />
       <Tabs.Screen name="new-movement" options={{ title: 'New Movement' }} />
       <Tabs.Screen name="new-category" options={{ title: 'New Category' }} />
       <Tabs.Screen name="new-goal" options={{ title: 'New Goal' }} />

@@ -15,6 +15,7 @@ import { Colors, Radius } from "@/constants/theme";
 import { ProfileProvider } from '@/state/profile';
 import { CategoriesProvider } from '@/state/categories';
 import { GoalsProvider } from '@/state/goals';
+import { NotificationsProvider } from '@/state/notifications';
 import { TransactionsProvider } from '@/state/transactions';
 
 SplashScreen.preventAutoHideAsync();
@@ -62,6 +63,7 @@ export default function RootLayout() {
     <ProfileProvider>
       <CategoriesProvider>
           <GoalsProvider>
+            <NotificationsProvider>
         <TransactionsProvider>
       <ThemeProvider value={navigationTheme}>
         <StatusBar style="dark" />
@@ -81,7 +83,8 @@ export default function RootLayout() {
         </Stack>
       </ThemeProvider>
       </TransactionsProvider>
-        </GoalsProvider>
+        </NotificationsProvider>
+          </GoalsProvider>
         </CategoriesProvider>
     </ProfileProvider>
   );

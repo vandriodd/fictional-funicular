@@ -2,15 +2,14 @@
  * Mock data for the UI pass. Swap these for real queries once the API exists.
  */
 
-import type { CurrencyCode } from '@/constants/currencies';
-import { Colors } from '@/constants/theme';
+import type { CurrencyCode } from "@/constants/currencies";
+import { Colors } from "@/constants/theme";
 
 export const user = {
-  firstName: 'Sofía',
-  fullName: 'Sofía García',
-  email: 'sofiagarcia@fictional.com',
-  avatarUrl: 'https://i.pravatar.cc/160?img=47',
-  unreadNotifications: 2,
+  firstName: "Sofía",
+  fullName: "Sofía García",
+  email: "sofiagarcia@fictional.com",
+  avatarUrl: "https://i.pravatar.cc/160?img=47",
 };
 
 /** Summary figures are held in the account's base currency. */
@@ -27,9 +26,9 @@ export type ExpenseSlice = {
 
 /** Sums to `monthlyBalance.outcome`. */
 export const expensesByCategory: ExpenseSlice[] = [
-  { categoryId: 'food', value: 18_400 },
-  { categoryId: 'home', value: 12_600 },
-  { categoryId: 'clothes', value: 7_200 },
+  { categoryId: "food", value: 18_400 },
+  { categoryId: "home", value: 12_600 },
+  { categoryId: "clothes", value: 7_200 },
 ];
 
 export type Category = {
@@ -43,38 +42,194 @@ export type Category = {
 };
 
 export const DEFAULT_CATEGORIES: Category[] = [
-  { id: 'food', label: 'Food', emoji: '🍔', color: Colors.primary },
-  { id: 'entertainment', label: 'Entertainment', emoji: '🎮', color: Colors.primaryLight },
-  { id: 'clothes', label: 'Clothes', emoji: '👕', color: Colors.accent },
-  { id: 'home', label: 'Home', emoji: '🏠', color: Colors.primaryLight },
-  { id: 'health', label: 'Health', emoji: '💊', color: Colors.primary },
-  { id: 'transport', label: 'Transport', emoji: '🚗', color: Colors.accentLight },
-  { id: 'groceries', label: 'Groceries', emoji: '🛒', color: Colors.primaryLight },
-  { id: 'dessert', label: 'Dessert', emoji: '🍰', color: Colors.accentLight },
-  { id: 'utilities', label: 'Utilities', emoji: '💡', color: Colors.primary },
-  { id: 'income', label: 'Income', emoji: '💰', color: Colors.primary },
-  { id: 'other', label: 'Other', emoji: '❓', color: Colors.ink },
+  { id: "food", label: "Food", emoji: "🍔", color: Colors.primary },
+  {
+    id: "entertainment",
+    label: "Entertainment",
+    emoji: "🎮",
+    color: Colors.primaryLight,
+  },
+  { id: "clothes", label: "Clothes", emoji: "👕", color: Colors.accent },
+  { id: "home", label: "Home", emoji: "🏠", color: Colors.primaryLight },
+  { id: "health", label: "Health", emoji: "💊", color: Colors.primary },
+  {
+    id: "transport",
+    label: "Transport",
+    emoji: "🚗",
+    color: Colors.accentLight,
+  },
+  {
+    id: "groceries",
+    label: "Groceries",
+    emoji: "🛒",
+    color: Colors.primaryLight,
+  },
+  { id: "dessert", label: "Dessert", emoji: "🍰", color: Colors.accentLight },
+  { id: "utilities", label: "Utilities", emoji: "💡", color: Colors.primary },
+  { id: "income", label: "Income", emoji: "💰", color: Colors.primary },
+  { id: "other", label: "Other", emoji: "❓", color: Colors.ink },
 ];
 
 /** Seeded so the Categories screen has something under CUSTOM. */
 export const SEED_CUSTOM_CATEGORIES: Category[] = [
-  { id: 'subscriptions', label: 'Subscriptions', emoji: '💳', color: Colors.primary, isCustom: true },
-  { id: 'holberton', label: 'Holberton', emoji: '🎓', color: Colors.accent, isCustom: true },
+  {
+    id: "subscriptions",
+    label: "Subscriptions",
+    emoji: "💳",
+    color: Colors.primary,
+    isCustom: true,
+  },
+  {
+    id: "holberton",
+    label: "Holberton",
+    emoji: "🎓",
+    color: Colors.accent,
+    isCustom: true,
+  },
 ];
 
-/** Icons offered when creating a category, grouped so the list stays browsable. */
 export const CATEGORY_ICON_GROUPS: { label: string; icons: string[] }[] = [
-  { label: 'Money', icons: ['💰', '💳', '🧾', '🏦', '💵', '🪙', '📈', '🎁', '💎', '🏧', '📊', '🤑'] },
-  { label: 'Food & drink', icons: ['🍔', '🍕', '🥗', '🍰', '☕', '🍺', '🛒', '🍜', '🥐', '🍣', '🍫', '🥤'] },
-  { label: 'Home & bills', icons: ['🏠', '💡', '🚿', '🔌', '🧹', '🛋️', '🔧', '📱', '📶', '🔑', '🪴', '🧺'] },
-  { label: 'Transport', icons: ['🚗', '🚌', '✈️', '⛽', '🚲', '🚕', '🛵', '🅿️', '🚆', '🛳️', '🛞', '🗺️'] },
-  { label: 'Health', icons: ['💊', '🏥', '🦷', '🧘', '🩺', '💪', '🧴', '🤒', '🏋️', '🥑', '😴', '🧠'] },
-  { label: 'Fun', icons: ['🎮', '🎬', '🎧', '🎸', '⚽', '🎨', '📚', '🎟️', '🏀', '🎲', '🎤', '📷'] },
-  { label: 'Life', icons: ['👕', '👟', '🎓', '🐶', '🌱', '✂️', '🧳', '🛡️', '👶', '🎂', '💐', '🐱'] },
-  { label: 'Other', icons: ['⭐', '❤️', '🔥', '✨', '📌', '🧩', '🪄', '❓', '🔔', '🏷️', '📎', '🌀'] },
+  {
+    label: "Money",
+    icons: [
+      "💰",
+      "💳",
+      "🧾",
+      "🏦",
+      "💵",
+      "🪙",
+      "📈",
+      "🎁",
+      "💎",
+      "🏧",
+      "📊",
+      "🤑",
+    ],
+  },
+  {
+    label: "Food & drink",
+    icons: [
+      "🍔",
+      "🍕",
+      "🥗",
+      "🍰",
+      "☕",
+      "🍺",
+      "🛒",
+      "🍜",
+      "🥐",
+      "🍣",
+      "🍫",
+      "🥤",
+    ],
+  },
+  {
+    label: "Home & bills",
+    icons: [
+      "🏠",
+      "💡",
+      "🚿",
+      "🔌",
+      "🧹",
+      "🛋️",
+      "🔧",
+      "📱",
+      "📶",
+      "🔑",
+      "🪴",
+      "🧺",
+    ],
+  },
+  {
+    label: "Transport",
+    icons: [
+      "🚗",
+      "🚌",
+      "✈️",
+      "⛽",
+      "🚲",
+      "🚕",
+      "🛵",
+      "🅿️",
+      "🚆",
+      "🛳️",
+      "🛞",
+      "🗺️",
+    ],
+  },
+  {
+    label: "Health",
+    icons: [
+      "💊",
+      "🏥",
+      "🦷",
+      "🧘",
+      "🩺",
+      "💪",
+      "🧴",
+      "🤒",
+      "🏋️",
+      "🥑",
+      "😴",
+      "🧠",
+    ],
+  },
+  {
+    label: "Fun",
+    icons: [
+      "🎮",
+      "🎬",
+      "🎧",
+      "🎸",
+      "⚽",
+      "🎨",
+      "📚",
+      "🎟️",
+      "🏀",
+      "🎲",
+      "🎤",
+      "📷",
+    ],
+  },
+  {
+    label: "Life",
+    icons: [
+      "👕",
+      "👟",
+      "🎓",
+      "🐶",
+      "🌱",
+      "✂️",
+      "🧳",
+      "🛡️",
+      "👶",
+      "🎂",
+      "💐",
+      "🐱",
+    ],
+  },
+  {
+    label: "Other",
+    icons: [
+      "⭐",
+      "❤️",
+      "🔥",
+      "✨",
+      "📌",
+      "🧩",
+      "🪄",
+      "❓",
+      "🔔",
+      "🏷️",
+      "📎",
+      "🌀",
+    ],
+  },
 ];
 
-export const CATEGORY_ICONS = CATEGORY_ICON_GROUPS.flatMap((group) => group.icons);
+export const CATEGORY_ICONS = CATEGORY_ICON_GROUPS.flatMap(
+  (group) => group.icons,
+);
 
 /** Colours offered when creating a category. Brand colours lead the palette. */
 export const CATEGORY_COLORS = [
@@ -83,23 +238,29 @@ export const CATEGORY_COLORS = [
   Colors.accent,
   Colors.accentLight,
   Colors.ink,
-  '#5B21B6',
-  '#3B82F6',
-  '#0EA5E9',
-  '#06B6D4',
-  '#10B981',
-  '#22C55E',
-  '#84CC16',
-  '#EAB308',
-  '#F59E0B',
-  '#EF4444',
-  '#EC4899',
-  '#A855F7',
-  '#64748B',
+  "#5B21B6",
+  "#3B82F6",
+  "#0EA5E9",
+  "#06B6D4",
+  "#10B981",
+  "#22C55E",
+  "#84CC16",
+  "#EAB308",
+  "#F59E0B",
+  "#EF4444",
+  "#EC4899",
+  "#A855F7",
+  "#64748B",
 ];
 
 /** The five tiles offered on the New Movement screen. */
-export const QUICK_CATEGORY_IDS = ['food', 'entertainment', 'clothes', 'home', 'other'];
+export const QUICK_CATEGORY_IDS = [
+  "food",
+  "entertainment",
+  "clothes",
+  "home",
+  "other",
+];
 
 export type Transaction = {
   id: string;
@@ -115,17 +276,95 @@ export type Transaction = {
 };
 
 export const transactions: Transaction[] = [
-  { id: 'txn-1', title: 'Salary', date: 'Aug 22, 2026', amount: 185_000, currency: 'MUR', categoryId: 'income' },
-  { id: 'txn-2', title: 'Burger King', date: 'Aug 22, 2026', amount: -450, currency: 'MUR', categoryId: 'food' },
-  { id: 'txn-3', title: 'Winners Supermarket', date: 'Aug 22, 2026', amount: -2_150, currency: 'MUR', categoryId: 'groceries' },
-  { id: 'txn-4', title: 'Uber', date: 'Aug 22, 2026', amount: -320, currency: 'MUR', categoryId: 'transport' },
-  { id: 'txn-5', title: 'Netflix', date: 'Aug 22, 2026', amount: -520, currency: 'MUR', categoryId: 'entertainment' },
-  { id: 'txn-6', title: 'Pharmacie Centrale', date: 'Aug 22, 2026', amount: -890, currency: 'MUR', categoryId: 'health' },
-  { id: 'txn-7', title: 'Café Lux', date: 'Aug 22, 2026', amount: -180, currency: 'MUR', categoryId: 'dessert' },
-  { id: 'txn-8', title: 'Refund · Zara', date: 'Aug 18, 2026', amount: 1_250, currency: 'MUR', categoryId: 'clothes' },
-  { id: 'txn-9', title: 'CEB Electricity', date: 'Aug 15, 2026', amount: -1_750, currency: 'MUR', categoryId: 'utilities' },
-  { id: 'txn-10', title: 'Zara', date: 'Aug 15, 2026', amount: -2_400, currency: 'MUR', categoryId: 'clothes' },
-  { id: 'txn-11', title: 'Emtel Mobile', date: 'Aug 15, 2026', amount: -650, currency: 'MUR', categoryId: 'utilities', emoji: '📱' },
+  {
+    id: "txn-1",
+    title: "Salary",
+    date: "Aug 22, 2026",
+    amount: 185_000,
+    currency: "MUR",
+    categoryId: "income",
+  },
+  {
+    id: "txn-2",
+    title: "Burger King",
+    date: "Aug 22, 2026",
+    amount: -450,
+    currency: "MUR",
+    categoryId: "food",
+  },
+  {
+    id: "txn-3",
+    title: "Winners Supermarket",
+    date: "Aug 22, 2026",
+    amount: -2_150,
+    currency: "MUR",
+    categoryId: "groceries",
+  },
+  {
+    id: "txn-4",
+    title: "Uber",
+    date: "Aug 22, 2026",
+    amount: -320,
+    currency: "MUR",
+    categoryId: "transport",
+  },
+  {
+    id: "txn-5",
+    title: "Netflix",
+    date: "Aug 22, 2026",
+    amount: -520,
+    currency: "MUR",
+    categoryId: "entertainment",
+  },
+  {
+    id: "txn-6",
+    title: "Pharmacie Centrale",
+    date: "Aug 22, 2026",
+    amount: -890,
+    currency: "MUR",
+    categoryId: "health",
+  },
+  {
+    id: "txn-7",
+    title: "Café Lux",
+    date: "Aug 22, 2026",
+    amount: -180,
+    currency: "MUR",
+    categoryId: "dessert",
+  },
+  {
+    id: "txn-8",
+    title: "Refund · Zara",
+    date: "Aug 18, 2026",
+    amount: 1_250,
+    currency: "MUR",
+    categoryId: "clothes",
+  },
+  {
+    id: "txn-9",
+    title: "CEB Electricity",
+    date: "Aug 15, 2026",
+    amount: -1_750,
+    currency: "MUR",
+    categoryId: "utilities",
+  },
+  {
+    id: "txn-10",
+    title: "Zara",
+    date: "Aug 15, 2026",
+    amount: -2_400,
+    currency: "MUR",
+    categoryId: "clothes",
+  },
+  {
+    id: "txn-11",
+    title: "Emtel Mobile",
+    date: "Aug 15, 2026",
+    amount: -650,
+    currency: "MUR",
+    categoryId: "utilities",
+    emoji: "📱",
+  },
 ];
 
 export type DailySpend = {
@@ -134,24 +373,44 @@ export type DailySpend = {
 };
 
 export const last7Days: DailySpend[] = [
-  { label: 'Aug 16', value: 2_450 },
-  { label: 'Aug 17', value: 7_000 },
-  { label: 'Aug 18', value: 12_400 },
-  { label: 'Aug 19', value: 4_850 },
-  { label: 'Aug 20', value: 7_000 },
-  { label: 'Aug 21', value: 7_050 },
-  { label: 'Aug 22', value: 7_100 },
+  { label: "Aug 16", value: 2_450 },
+  { label: "Aug 17", value: 7_000 },
+  { label: "Aug 18", value: 12_400 },
+  { label: "Aug 19", value: 4_850 },
+  { label: "Aug 20", value: 7_000 },
+  { label: "Aug 21", value: 7_050 },
+  { label: "Aug 22", value: 7_100 },
 ];
 
 /** Shown until someone picks another emoji. */
-export const DEFAULT_AVATAR_EMOJI = '🐙';
+export const DEFAULT_AVATAR_EMOJI = "🐙";
 
 /** Grid offered by the "Change profile icon" sheet. */
 export const PROFILE_EMOJIS = [
-  '🐙', '🦊', '🐼', '🦁', '🐸', '🐧',
-  '🦄', '🐝', '🦋', '🐳', '🌵', '🍄',
-  '🌻', '🍕', '🚀', '⚡', '🎧', '🎸',
-  '🏀', '⚽', '🧠', '👾', '🎨', '✨',
+  "🐙",
+  "🦊",
+  "🐼",
+  "🦁",
+  "🐸",
+  "🐧",
+  "🦄",
+  "🐝",
+  "🦋",
+  "🐳",
+  "🌵",
+  "🍄",
+  "🌻",
+  "🍕",
+  "🚀",
+  "⚡",
+  "🎧",
+  "🎸",
+  "🏀",
+  "⚽",
+  "🧠",
+  "👾",
+  "🎨",
+  "✨",
 ];
 
 export type Goal = {
@@ -173,33 +432,102 @@ export type Goal = {
 
 export const goals: Goal[] = [
   {
-    id: 'goal-1',
-    title: 'Food for the whole month',
-    categoryId: 'food',
+    id: "goal-1",
+    title: "Food for the whole month",
+    categoryId: "food",
     limit: 20_000,
     openingSpent: 11_550,
-    currency: 'MUR',
+    currency: "MUR",
     color: Colors.primary,
   },
   {
-    id: 'goal-2',
-    title: 'Utilities for the whole month',
-    categoryId: 'utilities',
+    id: "goal-2",
+    title: "Utilities for the whole month",
+    categoryId: "utilities",
     limit: 10_000,
     openingSpent: 5_600,
-    currency: 'MUR',
+    currency: "MUR",
     color: Colors.primary,
   },
   {
-    id: 'goal-3',
-    title: 'Transport for the whole month',
-    categoryId: 'transport',
+    id: "goal-3",
+    title: "Transport for the whole month",
+    categoryId: "transport",
     limit: 5_000,
     openingSpent: 3_680,
-    currency: 'MUR',
+    currency: "MUR",
     color: Colors.primary,
   },
 ];
 
 /** Past this share of the limit the progress bar switches to the warning colour. */
 export const GOAL_WARNING_RATIO = 0.75;
+
+/** Drives the icon tile and icon colour of a notification. */
+export type NotificationTone = "warning" | "danger" | "goal" | "info";
+
+export type NotificationIcon =
+  | "hanger"
+  | "burger"
+  | "wallet"
+  | "documents"
+  | "pill";
+
+export type AppNotification = {
+  id: string;
+  title: string;
+  body: string;
+  /** Already formatted for display. */
+  timestamp: string;
+  read: boolean;
+  tone: NotificationTone;
+  icon: NotificationIcon;
+};
+
+export const notifications: AppNotification[] = [
+  {
+    id: "notif-1",
+    title: "Limit almost reached",
+    body: "Shopping: you spent 22,500 MUR of 25,000 MUR (90%). Only 2,500 MUR left.",
+    timestamp: "10 min ago",
+    read: true,
+    tone: "warning",
+    icon: "hanger",
+  },
+  {
+    id: "notif-2",
+    title: "Food goal at 80%",
+    body: "You've spent 18,400 MUR of 24,000 MUR this month on Food. On track, but keep an eye on it.",
+    timestamp: "2 hours ago",
+    read: true,
+    tone: "goal",
+    icon: "burger",
+  },
+  {
+    id: "notif-3",
+    title: "Income recorded",
+    body: "185,000 MUR from your August salary has been credited.",
+    timestamp: "Today, 9:14",
+    read: false,
+    tone: "info",
+    icon: "wallet",
+  },
+  {
+    id: "notif-4",
+    title: "Weekly summary",
+    body: "This week you spent 19,200 MUR — 12% less than last week.",
+    timestamp: "Yesterday, 20:00",
+    read: true,
+    tone: "info",
+    icon: "documents",
+  },
+  {
+    id: "notif-5",
+    title: "Limit exceeded",
+    body: "You exceeded the Health limit: 14,100 MUR of 12,000 MUR this week.",
+    timestamp: "Yesterday, 15:30",
+    read: true,
+    tone: "danger",
+    icon: "pill",
+  },
+];

@@ -501,3 +501,86 @@ export function TrashIcon({ size, color, ...rest }: IconProps) {
     </IconBase>
   );
 }
+
+export function HangerIcon({ size, color, ...rest }: IconProps) {
+  return (
+    <IconBase size={size} {...rest}>
+      <Path
+        d="M12 9.2V7.6a2.3 2.3 0 1 1 2.3-2.3"
+        stroke={color}
+        strokeWidth={STROKE_WIDTH}
+        strokeLinecap="round"
+      />
+      <Path
+        d="M12 9.2 3.5 16.3a1.6 1.6 0 0 0 1 2.9h15a1.6 1.6 0 0 0 1-2.9z"
+        stroke={color}
+        strokeWidth={STROKE_WIDTH}
+        strokeLinejoin="round"
+      />
+    </IconBase>
+  );
+}
+
+export function BurgerIcon({ size, color, ...rest }: IconProps) {
+  return (
+    <IconBase size={size} {...rest}>
+      <Path
+        d="M4.6 10.4a7.4 7.4 0 0 1 14.8 0z"
+        stroke={color}
+        strokeWidth={STROKE_WIDTH}
+        strokeLinejoin="round"
+      />
+      <Path d="M4.2 13.6h15.6" stroke={color} strokeWidth={STROKE_WIDTH} strokeLinecap="round" />
+      <Path
+        d="M4.6 16.6h14.8a3.2 3.2 0 0 1-3.2 3.2H7.8a3.2 3.2 0 0 1-3.2-3.2z"
+        stroke={color}
+        strokeWidth={STROKE_WIDTH}
+        strokeLinejoin="round"
+      />
+    </IconBase>
+  );
+}
+
+export function WalletIcon({ size, color, ...rest }: IconProps) {
+  return (
+    <IconBase size={size} {...rest}>
+      <Rect x={2.9} y={5.4} width={18.2} height={13.2} rx={3.2} stroke={color} strokeWidth={STROKE_WIDTH} />
+      <Path d="M2.9 9.6h9.6" stroke={color} strokeWidth={STROKE_WIDTH} strokeLinecap="round" />
+      <Rect x={15.4} y={11.2} width={5.7} height={4.2} rx={1.6} stroke={color} strokeWidth={STROKE_WIDTH} />
+    </IconBase>
+  );
+}
+
+export function DocumentsIcon({ size, color, ...rest }: IconProps) {
+  return (
+    <IconBase size={size} {...rest}>
+      <Path
+        d="M13.4 3.2H8.8A2.4 2.4 0 0 0 6.4 5.6v12a2.4 2.4 0 0 0 2.4 2.4h8a2.4 2.4 0 0 0 2.4-2.4V9z"
+        stroke={color}
+        strokeWidth={STROKE_WIDTH}
+        strokeLinejoin="round"
+      />
+      <Path d="M13.4 3.2V9h5.8" stroke={color} strokeWidth={STROKE_WIDTH} strokeLinejoin="round" />
+      <Path
+        d="M4.2 7.6A2.4 2.4 0 0 0 2.6 9.9v8.7a3.2 3.2 0 0 0 3.2 3.2h7.4"
+        stroke={color}
+        strokeWidth={STROKE_WIDTH}
+        strokeLinecap="round"
+      />
+    </IconBase>
+  );
+}
+
+export function PillIcon({ size, color, ...rest }: IconProps) {
+  return (
+    <IconBase size={size} {...rest}>
+      <Path
+        d="m10.5 20.5 10-10a5 5 0 0 0-7.07-7.07l-10 10a5 5 0 0 0 7.07 7.07Z"
+        stroke={color}
+        strokeWidth={STROKE_WIDTH}
+        strokeLinejoin="round"
+      />
+      <Path d="m8.5 8.5 7 7" stroke={color} strokeWidth={STROKE_WIDTH} strokeLinecap="round" />
+    </IconBase>
+  );
+}
